@@ -1,4 +1,4 @@
-name: seguidor_finanzas
+name: Seguidor Finanzas
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+
+  http: ^1.4.0
 
 dev_dependencies:
   flutter_test:
