@@ -26,4 +26,10 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
     fontSize: 15,
   );
+
+  static const TextStyle textTitleTransaccionList = TextStyle(
+    color: Colors.teal,
+    fontWeight: FontWeight.w600,
+    fontSize: 20
+  );
 }
