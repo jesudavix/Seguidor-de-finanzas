@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seguidor_finanzas/styles/colors.dart';
 import 'package:seguidor_finanzas/widgets/appbar_home_screen.dart';
 import 'package:seguidor_finanzas/widgets/header_home_screen.dart';
+import 'package:seguidor_finanzas/widgets/transaction_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,14 +18,11 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           HeaderHomeScreen(),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              color: AppColors.bodyTransationList,
-            ),
-          ),
+          TransactionList(),
         ],
       ),
     );
   }
 }
+
+
