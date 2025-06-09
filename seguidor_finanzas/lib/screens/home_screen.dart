@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:seguidor_finanzas/styles/colors.dart';
+import 'package:seguidor_finanzas/widgets/appbar_home_screen.dart';
+import 'package:seguidor_finanzas/widgets/header_home_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,10 +9,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.tealAccent,
+      backgroundColor: AppColors.background,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBarHomeScreen(),
+      ),
       body: Column(
         children: [
-          Text("Hola mundo!!")
+          HeaderHomeScreen(),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: AppColors.bodyTransationList,
+            ),
+          ),
         ],
       ),
     );
