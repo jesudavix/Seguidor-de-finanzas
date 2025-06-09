@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seguidor_finanzas/screens/Loadin_sceen_state.dart';
-import 'package:seguidor_finanzas/screens/home_screen.dart';
+import 'package:seguidor_finanzas/screens/home_failuri.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoadingScreenState(),
+      home:HomeFailure(),
     );
   }
 }
