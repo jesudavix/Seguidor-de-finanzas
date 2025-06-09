@@ -30,7 +30,7 @@ class AppBarHomeScreen extends StatelessWidget {
               Text("Hola Juan, ", style: AppTextStyle.textTitleAppBar),
               SizedBox(height: 4),
               Text(
-                "¿Que transicion deseas agregar hoy?",
+                "¿Que transaccion deseas agregar hoy?",
                 style: AppTextStyle.textSubTitleAppBar,
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seguidor_finanzas/styles/colors.dart';
+import 'package:seguidor_finanzas/widgets/agregar_transaction.dart';
 import 'package:seguidor_finanzas/widgets/appbar_home_screen.dart';
 import 'package:seguidor_finanzas/widgets/header_home_screen.dart';
 import 'package:seguidor_finanzas/widgets/transaction_list.dart';
@@ -15,11 +16,15 @@ class HomeScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(100),
         child: AppBarHomeScreen(),
       ),
-      body: Column(
-        children: [
-          HeaderHomeScreen(),
-          TransactionList(),
-        ],
+      body: Column(children: [HeaderHomeScreen(), TransactionList()]),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.background,
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: (context){
+            return AgregarTransaction();
+          });
+        },
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
