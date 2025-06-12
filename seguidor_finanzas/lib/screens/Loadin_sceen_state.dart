@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class LoadingScreenState extends StatelessWidget {
@@ -28,7 +27,7 @@ class _AnimatedLoadingDotsState extends State<_AnimatedLoadingDots> with SingleT
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 30),
       vsync: this,
     )..repeat(); 
 
