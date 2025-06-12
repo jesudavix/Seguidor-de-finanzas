@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:seguidor_finanzas/blocs/bloc/selected_transaccion_type_bloc.dart';
 import 'package:seguidor_finanzas/styles/colors.dart';
 import 'package:seguidor_finanzas/widgets/agregar_transaction.dart';
 import 'package:seguidor_finanzas/widgets/appbar_home_screen.dart';
 import 'package:seguidor_finanzas/widgets/header_home_screen.dart';
 import 'package:seguidor_finanzas/widgets/transaction_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,14 +22,19 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.background,
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context){
-            return AgregarTransaction();
-          });
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (_) {
+              return BlocProvider.value(
+                value: context.read<SelectedTransaccionTypeBloc>(),
+                child: AgregarTransaction(),
+              );
+            },
+          );
         },
         child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 }
-
-
