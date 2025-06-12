@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:seguidor_finanzas/screens/Loadin_sceen_state.dart';
 
-void main() => runApp(const MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: HomeFailure(),
-));
 
-class HomeFailure extends StatelessWidget {
-  const HomeFailure({super.key});
+class FailureScreen  extends StatelessWidget {
+  const FailureScreen ({super.key});
 
   @override
   Widget build(BuildContext context) {
