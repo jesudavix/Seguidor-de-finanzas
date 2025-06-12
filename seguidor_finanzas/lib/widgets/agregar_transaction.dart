@@ -3,10 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seguidor_finanzas/blocs/bloc/selected_transaccion_type_bloc.dart';
+import 'package:seguidor_finanzas/blocs/bloc/transaccion_agg_bloc.dart';
+import 'package:seguidor_finanzas/models/transaccion.dart';
 import 'package:seguidor_finanzas/styles/text_style.dart';
 
 class AgregarTransaction extends StatelessWidget {
-  const AgregarTransaction({super.key});
+  final _descripcionController = TextEditingController();
+  final _montoController = TextEditingController();
+
+  AgregarTransaction({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +62,7 @@ class AgregarTransaction extends StatelessWidget {
           SizedBox(height: 20),
           Text("Monto", style: AppTextStyle.textTitleMonto),
           TextField(
+            controller: _montoController,
             inputFormatters: [
               CurrencyTextInputFormatter.currency(symbol: "\$"),
             ],
@@ -71,6 +77,7 @@ class AgregarTransaction extends StatelessWidget {
           SizedBox(height: 20),
           Text("Descripcion", style: AppTextStyle.textTitleDescripcion),
           TextField(
+            controller: _descripcionController,
             textAlign: TextAlign.center,
             decoration: InputDecoration.collapsed(
               hintText: "Ingresa una descripcion aqui",
@@ -82,7 +89,32 @@ class AgregarTransaction extends StatelessWidget {
           SizedBox(
             width: 250,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final descripcion = _descripcionController.text.trim();
+                final montoStr =
+                    _montoController.text
+                        .replaceAll("\$", "")
+                        .replaceAll(",", "")
+                        .trim();
+                final monto = double.tryParse(montoStr);
+                if (descripcion.isNotEmpty && monto != null) {
+                  final tipo =
+                      context.read<SelectedTransaccionTypeBloc>().state;
+                  context.read<TransaccionAggBloc>().add(
+                    AgregarTransaccion(
+                      transaccion: Transaccion(
+                        tipo:
+                            tipo.tipoSeleccionado == TipoTransaccion.ingreso
+                                ? TransaccionType.ingreso
+                                : TransaccionType.gasto,
+                        descripcion: descripcion,
+                        monto: monto,
+                      ),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
+              },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
               child: Text(
                 "Agregar Transaccion",

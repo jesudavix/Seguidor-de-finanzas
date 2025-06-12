@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seguidor_finanzas/blocs/bloc/selected_transaccion_type_bloc.dart';
+import 'package:seguidor_finanzas/blocs/bloc/transaccion_agg_bloc.dart';
 //import 'package:seguidor_finanzas/screens/home_failuri.dart';
 import 'package:seguidor_finanzas/screens/home_screen.dart';
 
@@ -16,6 +17,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SelectedTransaccionTypeBloc()),
+        BlocProvider(create: (context) => TransaccionAggBloc()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
