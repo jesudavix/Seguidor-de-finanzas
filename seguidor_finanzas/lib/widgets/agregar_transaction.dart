@@ -15,10 +15,15 @@ class AgregarTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500,
-      width: double.infinity,
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        top: 12,
+        left: 16,
+        right: 16,
+      ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             margin: EdgeInsets.only(top: 8),
@@ -72,7 +77,7 @@ class AgregarTransaction extends StatelessWidget {
               hintStyle: TextStyle(color: Colors.grey),
             ),
             keyboardType: TextInputType.number,
-            autofocus: true,
+            autofocus: false,
           ),
           SizedBox(height: 20),
           Text("Descripcion", style: AppTextStyle.textTitleDescripcion),

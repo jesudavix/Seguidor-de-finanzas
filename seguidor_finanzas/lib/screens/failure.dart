@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seguidor_finanzas/screens/Loadin_sceen_state.dart';
+import 'package:seguidor_finanzas/screens/login.dart';
 
 
 class FailureScreen  extends StatelessWidget {
@@ -45,7 +45,7 @@ class FailureScreen  extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LoadingScreenState(),
+                      builder: (context) => const LoginScreen(),
                       ),
                     );
                 },

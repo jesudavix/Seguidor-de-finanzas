@@ -5,7 +5,9 @@ import 'package:seguidor_finanzas/styles/colors.dart';
 import 'package:seguidor_finanzas/styles/text_style.dart';
 
 class AppBarHomeScreen extends StatelessWidget {
-  const AppBarHomeScreen({super.key});
+
+  final String nombre;
+  const AppBarHomeScreen({super.key, required this.nombre});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class AppBarHomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Hola Juan, ", style: AppTextStyle.textTitleAppBar),
+              Text("Hola $nombre, ", style: AppTextStyle.textTitleAppBar),
               SizedBox(height: 4),
               Text(
                 "¿Que transaccion deseas agregar hoy?",

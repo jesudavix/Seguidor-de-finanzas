@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:seguidor_finanzas/blocs/bloc/home_bloc.dart';
 import 'package:seguidor_finanzas/screens/Loadin_sceen_state.dart';
-import 'package:seguidor_finanzas/screens/failure_screen.dart';
+import 'package:seguidor_finanzas/screens/failure.dart';
 import 'package:seguidor_finanzas/screens/home_screen.dart';
 import 'package:seguidor_finanzas/styles/colors.dart';
 

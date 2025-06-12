@@ -27,7 +27,15 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColors.background,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100),
-          child: AppBarHomeScreen(),
+          child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeLoadSuccess) {
+                return AppBarHomeScreen(nombre: state.nombreUsuario);
+              } else{
+                return SizedBox.shrink();
+              }
+            },
+          ),
         ),
         body: Column(children: [HeaderHomeScreen(), TransactionList()]),
         floatingActionButton: FloatingActionButton(

@@ -17,7 +17,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        emit(HomeLoadSuccess());
+        emit(HomeLoadSuccess(nombreUsuario: ""));
       } else {
         emit(HomeFailure(message: "Error al cargar los datos"));
       }
@@ -44,7 +44,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         );
 
         if (user.isNotEmpty) {
-          emit(HomeLoadSuccess());
+          emit(HomeLoadSuccess(nombreUsuario: user["nombre_usuario"]));
         } else {
           emit(
             HomeFailure(message: 'Nombre de usuario o contraseña incorrectos'),
