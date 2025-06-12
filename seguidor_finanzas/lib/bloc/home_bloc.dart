@@ -23,7 +23,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     });
 
-    // ✅ Evento de login
     on<HomeLoginRequested>((event, emit) async {
       emit(HomeLoadInProgress());
       try {
