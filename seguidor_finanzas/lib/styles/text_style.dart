@@ -32,4 +32,14 @@ class AppTextStyle {
     fontWeight: FontWeight.w600,
     fontSize: 20
   );
+
+  static const TextStyle textTitleMonto = TextStyle(
+    color: Colors.teal,
+    fontSize: 18
+  );
+
+  static const TextStyle textTitleDescripcion = TextStyle(
+    color: Colors.teal,
+    fontSize: 18
+  );
 }
