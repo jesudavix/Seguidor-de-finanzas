@@ -2,61 +2,54 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:http/http.dart' as http;
+import 'package:seguidor_finanzas/models/model_user.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
-    // Evento de búsqueda (lo dejas si lo usas en otra parte)
-    on<HomeSearchPressed>((event, emit) async {
-      emit(HomeLoadInProgress());
-      await Future.delayed(const Duration(seconds: 3));
+    on<HomeLoginRequested>(_onLoginRequested);
+    on<HomeCerrarSesion>((event, emit) => emit(HomeInitial()));
+  }
+
+  Future<void> _onLoginRequested(
+    HomeLoginRequested event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(HomeLoadInProgress());
+    await Future.delayed(const Duration(milliseconds: 100));
+
+    try {
       final url = Uri.parse(
         'https://run.mocky.io/v3/392d4730-cab5-4700-8b6d-af4a528a2ac3',
       );
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        emit(HomeLoadSuccess(nombreUsuario: ""));
+
+      final res = await http.get(url);
+      if (res.statusCode != 200) {
+        emit(HomeFailure(message: 'Error al conectar con el servidor'));
+        return;
+      }
+
+      final List<dynamic> data = json.decode(res.body);
+      final List<User> users = data.map((json) => User.fromJson(json)).toList();
+
+      final user = users.firstWhere(
+        (u) =>
+            u.username == event.username.trim() &&
+            u.password == event.password.trim(),
+        orElse: () => User(username: '', password: ''),
+      );
+
+      if (user.username.isNotEmpty) {
+        emit(HomeLoadSuccess(nombreUsuario: user.username));
       } else {
-        emit(HomeFailure(message: "Error al cargar los datos"));
-      }
-    });
-
-    on<HomeLoginRequested>((event, emit) async {
-      emit(HomeLoadInProgress());
-      try {
-        final url = Uri.parse(
-          'https://run.mocky.io/v3/392d4730-cab5-4700-8b6d-af4a528a2ac3',
+        emit(
+          HomeFailure(message: 'Nombre de usuario o contraseña incorrectos'),
         );
-        final res = await http.get(url);
-        if (res.statusCode != 200) {
-          emit(HomeFailure(message: 'Error al conectar con el servidor'));
-          return;
-        }
-
-        final usuarios = json.decode(res.body) as List;
-        final user = usuarios.firstWhere(
-          (u) =>
-              u['nombre_usuario'] == event.username.trim() &&
-              u['password'] == event.password.trim(),
-          orElse: () => {},
-        );
-
-        if (user.isNotEmpty) {
-          emit(HomeLoadSuccess(nombreUsuario: user["nombre_usuario"]));
-        } else {
-          emit(
-            HomeFailure(message: 'Nombre de usuario o contraseña incorrectos'),
-          );
-        }
-      } catch (e) {
-        emit(HomeFailure(message: 'Error: $e'));
       }
-    });
-
-    on<HomeCerrarSesion>((event, emit) async {
-      emit(HomeInitial());
-    });
+    } catch (e) {
+      emit(HomeFailure(message: 'Error inesperado: $e'));
+    }
   }
 }

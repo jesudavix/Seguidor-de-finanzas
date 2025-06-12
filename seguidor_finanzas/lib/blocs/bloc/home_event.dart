@@ -7,8 +7,6 @@ sealed class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class HomeSearchPressed extends HomeEvent {}
-
 final class HomeLoginRequested extends HomeEvent {
   final String username;
   final String password;
@@ -19,4 +17,4 @@ final class HomeLoginRequested extends HomeEvent {
   List<Object> get props => [username, password];
 }
 
-final class HomeCerrarSesion extends HomeEvent{}
+final class HomeCerrarSesion extends HomeEvent {}
