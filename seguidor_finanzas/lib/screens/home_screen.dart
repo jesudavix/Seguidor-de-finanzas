@@ -20,14 +20,15 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.background,
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context){
-            return AgregarTransaction();
-          });
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return AgregarTransaction();
+            },
+          );
         },
         child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 }
-
-

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:seguidor_finanzas/screens/Loadin_sceen_state.dart';
 
-void main() => runApp(const MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: HomeFailure(),
-));
-
-class HomeFailure extends StatelessWidget {
-  const HomeFailure({super.key});
+class HomeFalla extends StatelessWidget {
+  const HomeFalla({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1B4332), 
+      backgroundColor: const Color(0xFF1B4332),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -24,7 +19,10 @@ class HomeFailure extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: const LinearGradient(
-                    colors: [Color.fromARGB(255, 255, 0, 0), Color.fromARGB(255, 255, 0, 0)],
+                    colors: [
+                      Color.fromARGB(255, 255, 0, 0),
+                      Color.fromARGB(255, 255, 0, 0),
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -50,8 +48,8 @@ class HomeFailure extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const LoadingScreenState(),
-                      ),
-                    );
+                    ),
+                  );
                 },
                 icon: const Icon(Icons.refresh),
                 label: const Text(
@@ -61,12 +59,20 @@ class HomeFailure extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 0, 0),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 14,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   elevation: 10,
-                  shadowColor: const Color.fromARGB(255, 255, 0, 0).withOpacity(0.4),
+                  shadowColor: const Color.fromARGB(
+                    255,
+                    255,
+                    0,
+                    0,
+                  ).withOpacity(0.4),
                 ),
               ),
             ],
