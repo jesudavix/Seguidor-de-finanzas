@@ -16,7 +16,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final usernameCtrl = TextEditingController();
   final passCtrl = TextEditingController();
-
   bool _isLoadingShown = false;
 
   void _showSnackbar(String mensaje) {
@@ -38,9 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _closeLoadingIfNeeded() {
     if (_isLoadingShown) {
-      Navigator.of(
-        context,
-      ).maybePop(); // Evita errores si no hay pantalla para cerrar
+      Navigator.of(context).maybePop();
       _isLoadingShown = false;
     }
   }
@@ -51,6 +48,39 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
       ).push(MaterialPageRoute(builder: (_) => const FailureScreen()));
     });
+  }
+
+  void _onLoginPressed() {
+    final username = usernameCtrl.text.trim();
+    final password = passCtrl.text.trim();
+
+    if (username.isEmpty || password.isEmpty) {
+      _showSnackbar('Por favor ingresa usuario y contraseña');
+      return;
+    }
+
+    context.read<HomeBloc>().add(
+      HomeLoginRequested(username: username, password: password),
+    );
+  }
+
+  Widget _inputField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool obscure = false,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: obscure,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: AppColors.bodyTransationList,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        prefixIcon: Icon(icon),
+      ),
+    );
   }
 
   Widget _buildLoginForm() {
@@ -82,14 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 25),
           ElevatedButton(
-            onPressed: () {
-              context.read<HomeBloc>().add(
-                HomeLoginRequested(
-                  username: usernameCtrl.text.trim(),
-                  password: passCtrl.text.trim(),
-                ),
-              );
-            },
+            onPressed: _onLoginPressed,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               foregroundColor: AppColors.textColorPrimary,
@@ -101,25 +124,6 @@ class _LoginScreenState extends State<LoginScreen> {
             child: const Text('Entrar', style: TextStyle(fontSize: 20)),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _inputField({
-    required TextEditingController controller,
-    required String label,
-    required IconData icon,
-    bool obscure = false,
-  }) {
-    return TextField(
-      controller: controller,
-      obscureText: obscure,
-      decoration: InputDecoration(
-        labelText: label,
-        filled: true,
-        fillColor: AppColors.bodyTransationList,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        prefixIcon: Icon(icon),
       ),
     );
   }
@@ -138,7 +142,9 @@ class _LoginScreenState extends State<LoginScreen> {
             _navigateToFailure();
           } else if (state is HomeLoadSuccess) {
             _closeLoadingIfNeeded();
-            _showSnackbar('Bienvenido, ${usernameCtrl.text}');
+            _showSnackbar('Bienvenido, ${state.nombreUsuario}');
+            usernameCtrl.clear();
+            passCtrl.clear();
             Future.microtask(() {
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (_) => const HomeScreen()),
@@ -147,7 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
             });
           }
         },
-        builder: (context, state) => _buildLoginForm(),
+        builder: (context, state) {
+          return _buildLoginForm();
+        },
       ),
     );
   }

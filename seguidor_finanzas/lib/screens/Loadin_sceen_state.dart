@@ -7,9 +7,7 @@ class LoadingScreenState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1B4332),
-      body: Center(
-        child: _AnimatedLoadingDots(),
-      ),
+      body: Center(child: _AnimatedLoadingDots()),
     );
   }
 }
@@ -19,7 +17,8 @@ class _AnimatedLoadingDots extends StatefulWidget {
   State<_AnimatedLoadingDots> createState() => _AnimatedLoadingDotsState();
 }
 
-class _AnimatedLoadingDotsState extends State<_AnimatedLoadingDots> with SingleTickerProviderStateMixin {
+class _AnimatedLoadingDotsState extends State<_AnimatedLoadingDots>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<int> _dotAnimation;
 
@@ -29,11 +28,12 @@ class _AnimatedLoadingDotsState extends State<_AnimatedLoadingDots> with SingleT
     _controller = AnimationController(
       duration: const Duration(seconds: 30),
       vsync: this,
-    )..repeat(); 
+    )..repeat();
 
-    _dotAnimation = StepTween(begin: 0, end: 4).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.linear),
-    );
+    _dotAnimation = StepTween(
+      begin: 0,
+      end: 4,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
   }
 
   @override
@@ -51,7 +51,6 @@ class _AnimatedLoadingDotsState extends State<_AnimatedLoadingDots> with SingleT
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -66,7 +65,7 @@ class _AnimatedLoadingDotsState extends State<_AnimatedLoadingDots> with SingleT
                     color: Colors.amber.withOpacity(0.6),
                     blurRadius: 20,
                     spreadRadius: 5,
-                  )
+                  ),
                 ],
               ),
               child: const Icon(

@@ -10,4 +10,4 @@ class Transaccion {
   });
 }
 
-enum TransaccionType {ingreso, gasto}
+enum TransaccionType { ingreso, gasto }
