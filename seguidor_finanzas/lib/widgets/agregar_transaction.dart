@@ -23,7 +23,6 @@ class AgregarTransaction extends StatelessWidget {
         right: 16,
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             margin: EdgeInsets.only(top: 8),
@@ -76,8 +75,6 @@ class AgregarTransaction extends StatelessWidget {
               hintText: "\$ 0.00",
               hintStyle: TextStyle(color: Colors.grey),
             ),
-            keyboardType: TextInputType.number,
-            autofocus: false,
           ),
           SizedBox(height: 20),
           Text("Descripcion", style: AppTextStyle.textTitleDescripcion),
@@ -88,7 +85,6 @@ class AgregarTransaction extends StatelessWidget {
               hintText: "Ingresa una descripcion aqui",
               hintStyle: TextStyle(color: Colors.grey),
             ),
-            keyboardType: TextInputType.text,
           ),
           SizedBox(height: 20),
           SizedBox(
