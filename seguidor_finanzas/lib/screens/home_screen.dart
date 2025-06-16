@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is HomeLoadSuccess) {
                 return AppBarHomeScreen(nombre: state.nombreUsuario);
-              } else{
+              } else {
                 return SizedBox.shrink();
               }
             },
@@ -47,7 +47,10 @@ class HomeScreen extends StatelessWidget {
               builder: (_) {
                 return BlocProvider.value(
                   value: context.read<SelectedTransaccionTypeBloc>(),
-                  child: AgregarTransaction(),
+                  child: FractionallySizedBox(
+                    heightFactor: 0.65,
+                    child: AgregarTransaction()
+                  ),
                 );
               },
             );
